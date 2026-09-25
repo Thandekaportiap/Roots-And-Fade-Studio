@@ -44,3 +44,6 @@ footer h3{color:var(--cr);font-size:1.05rem}footer a{display:block;text-decorati
 footer a.btn{display:inline-block}
 .fb{border-top:1px solid #24483e;margin-top:32px;padding-top:16px;display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;font-size:.9rem}
 .fb span a{display:inline;margin-left:14px}
+.thumb{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;margin-bottom:12px}
+.thumb.sm{aspect-ratio:16/9}
+.hero-img{width:100%;max-width:420px;border-radius:16px;object-fit:cover;aspect-ratio:1/1}

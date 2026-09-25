@@ -1,8 +1,19 @@
 import {useState,useEffect} from 'react'
 import {SV,BB,ADDR,PH,dur,tm,dlab,iso,ld,save,slots,cal,dl,TERMS} from './data.js'
+import taperFade from './Taper-Fade.webp'
+import fadeStyles from './fadeStyles.jpg'
+import knotlessBob from './knotlessBob.jpg'
+import knotlessLong from './knotlessLong.jpg'
+
+const IMG = {
+  fade: taperFade,      // Skin or Taper Fade
+  combo: fadeStyles,    // Cut and Beard Combo
+  knot: knotlessBob,    // Knotless Braids
+  box: knotlessLong,    // Box Braids
+}
 
 const TITLES={'':'Barbers and Braids in Durban',services:'Services and Prices',about:'About Us',book:'Book and Contact',terms:'Terms and Conditions',privacy:'Privacy Policy'}
-const Row=({s})=><div className="rw"><div><b>{s[1]}</b><br/><span className="mu">{dur(s[3])}</span></div><div className="pr">R{s[2]}</div><a className="btn sm" href={`#/book/${s[0]}`}>Book</a></div>
+const Row=({s})=><div className="rw">{IMG[s[0]]&&<img src={IMG[s[0]]} alt={s[1]} className="thumb sm"/>}<div><b>{s[1]}</b><br/><span className="mu">{dur(s[3])}</span></div><div className="pr">R{s[2]}</div><a className="btn sm" href={`#/book/${s[0]}`}>Book</a></div>
 const Hours=()=><>Mon to Fri: 08:00 to 18:00<br/>Saturday: 08:00 to 16:00<br/>Sunday: Closed</>
 const Braid=()=><svg viewBox="0 0 320 320" role="img" aria-label="Braid emblem"><circle cx="160" cy="160" r="150" fill="#12564a"/><g fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="15"><path d="M100 60l30 34-30 34 30 34-30 34 30 34-30 34" stroke="#f0b429"/><path d="M160 60l-30 34 30 34-30 34 30 34-30 34 30 34" stroke="#eef2ee"/><path d="M160 60l30 34-30 34 30 34-30 34 30 34-30 34" stroke="#f0b429"/><path d="M220 60l-30 34 30 34-30 34 30 34-30 34 30 34" stroke="#eef2ee"/></g></svg>
 const Logo=()=><svg width="38" height="38" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="#f0b429"/><path d="M13 8l14 21M27 8L13 29" stroke="#0e2a24" strokeWidth="3" strokeLinecap="round"/><circle cx="12" cy="32" r="3.5" fill="none" stroke="#0e2a24" strokeWidth="2.5"/><circle cx="28" cy="32" r="3.5" fill="none" stroke="#0e2a24" strokeWidth="2.5"/></svg>
@@ -44,7 +55,7 @@ function Modal(){
 const Home=()=><>
   <section className="hero"><div className="w hg"><div><h1>Sharp cuts and beautiful braids, rooted in Durban.</h1><p>Barbers and braiders under one roof in Morningside. Walk in looking good, walk out feeling even better.</p><div className="ba"><a className="btn g" href="#/book">Book your chair</a><a className="btn o" href="#/services">See services and prices</a></div></div><Braid/></div></section>
   <section className="s"><div className="w"><h2>Why people come back</h2><div className="gr"><div className="cd"><h3>Barbers who listen</h3><p>Every cut starts with a chat about what you want and what suits you.</p></div><div className="cd"><h3>Braids without the pain</h3><p>Gentle parting, light tension and protective styles that last.</p></div><div className="cd"><h3>The full finish</h3><p>Hot towels, line-ups and quality products come standard.</p></div></div></div></section>
-  <section className="s" style={{paddingTop:0}}><div className="w"><h2>Popular services</h2><div className="gr">{['fade','combo','knot'].map(i=>{const s=SV.find(x=>x[0]===i);return <div className="cd" key={i}><h3>{s[1]}</h3><p className="mu">{dur(s[3])}</p><p className="pr">R{s[2]}</p><a className="btn sm" href={`#/book/${i}`}>Book this</a></div>})}</div></div></section>
+  <section className="s" style={{paddingTop:0}}><div className="w"><h2>Popular services</h2><div className="gr">{['fade','combo','knot'].map(i=>{const s=SV.find(x=>x[0]===i);return <div className="cd" key={i}>{IMG[i]&&<img src={IMG[i]} alt={s[1]} className="thumb"/>}<h3>{s[1]}</h3><p className="mu">{dur(s[3])}</p><p className="pr">R{s[2]}</p><a className="btn sm" href={`#/book/${i}`}>Book this</a></div>})}</div></div></section>
   <section className="s" style={{paddingTop:0}}><div className="w"><h2>What clients say</h2><div className="gr">{[['Best fade in Durban. Thabo gets it right every single time.','Lwazi, Musgrave'],['My knotless braids lasted six weeks and my scalp felt great. Naledi is an artist.','Ayanda, Berea'],['Took my son for his first cut. Patient, quick and he left smiling.','Michael, Morningside']].map(([q,n])=><div className="cd" key={n}><p>{q}</p><b>{n}</b></div>)}</div></div></section>
   <section className="band"><div className="w"><h2>Ready for a fresh look?</h2><a className="btn g" href="#/book">Book now</a></div></section>
 </>
