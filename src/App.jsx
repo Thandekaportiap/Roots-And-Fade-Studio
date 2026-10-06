@@ -4,6 +4,7 @@ import taperFade from './Taper-Fade.webp'
 import fadeStyles from './fadeStyles.jpg'
 import knotlessBob from './knotlessBob.jpg'
 import knotlessLong from './knotlessLong.jpg'
+import ImageCarousel from './ImageCarousel.jsx'
 
 const IMG = {
   fade: taperFade,      // Skin or Taper Fade
@@ -11,6 +12,13 @@ const IMG = {
   knot: knotlessBob,    // Knotless Braids
   box: knotlessLong,    // Box Braids
 }
+
+const GALLERY = [
+  { src: taperFade, label: 'Skin or Taper Fade' },
+  { src: fadeStyles, label: 'Cut and Beard Combo' },
+  { src: knotlessBob, label: 'Knotless Braids' },
+  { src: knotlessLong, label: 'Box Braids' },
+]
 
 const TITLES={'':'Barbers and Braids in Durban',services:'Services and Prices',about:'About Us',book:'Book and Contact',terms:'Terms and Conditions',privacy:'Privacy Policy'}
 const Row=({s})=><div className="rw">{IMG[s[0]]&&<img src={IMG[s[0]]} alt={s[1]} className="thumb sm"/>}<div><b>{s[1]}</b><br/><span className="mu">{dur(s[3])}</span></div><div className="pr">R{s[2]}</div><a className="btn sm" href={`#/book/${s[0]}`}>Book</a></div>
@@ -56,9 +64,11 @@ const Home=()=><>
   <section className="hero"><div className="w hg"><div><h1>Sharp cuts and beautiful braids, rooted in Durban.</h1><p>Barbers and braiders under one roof in Morningside. Walk in looking good, walk out feeling even better.</p><div className="ba"><a className="btn g" href="#/book">Book your chair</a><a className="btn o" href="#/services">See services and prices</a></div></div><Braid/></div></section>
   <section className="s"><div className="w"><h2>Why people come back</h2><div className="gr"><div className="cd"><h3>Barbers who listen</h3><p>Every cut starts with a chat about what you want and what suits you.</p></div><div className="cd"><h3>Braids without the pain</h3><p>Gentle parting, light tension and protective styles that last.</p></div><div className="cd"><h3>The full finish</h3><p>Hot towels, line-ups and quality products come standard.</p></div></div></div></section>
   <section className="s" style={{paddingTop:0}}><div className="w"><h2>Popular services</h2><div className="gr">{['fade','combo','knot'].map(i=>{const s=SV.find(x=>x[0]===i);return <div className="cd" key={i}>{IMG[i]&&<img src={IMG[i]} alt={s[1]} className="thumb"/>}<h3>{s[1]}</h3><p className="mu">{dur(s[3])}</p><p className="pr">R{s[2]}</p><a className="btn sm" href={`#/book/${i}`}>Book this</a></div>})}</div></div></section>
+  <section className="s" style={{paddingTop:0}}><div className="w"><h2>Our work</h2><ImageCarousel images={GALLERY}/></div></section>
   <section className="s" style={{paddingTop:0}}><div className="w"><h2>What clients say</h2><div className="gr">{[['Best fade in Durban. Thabo gets it right every single time.','Lwazi, Musgrave'],['My knotless braids lasted six weeks and my scalp felt great. Naledi is an artist.','Ayanda, Berea'],['Took my son for his first cut. Patient, quick and he left smiling.','Michael, Morningside']].map(([q,n])=><div className="cd" key={n}><p>{q}</p><b>{n}</b></div>)}</div></div></section>
   <section className="band"><div className="w"><h2>Ready for a fresh look?</h2><a className="btn g" href="#/book">Book now</a></div></section>
 </>
+
 
 const Services=()=><section className="s"><div className="w"><h1>Services and prices</h1><p className="mu">All prices in rand. Braid times depend on hair length and thickness.</p>
   <h2 style={{marginTop:32}}>Barber</h2>{SV.filter(s=>s[4]==='b').map(s=><Row key={s[0]} s={s}/>)}
